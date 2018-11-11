@@ -26,6 +26,7 @@ dependencies:
 - parser-combinators
 - extra
 - safe
+- directory-tree
 
 ghc-options:
 - -Wall

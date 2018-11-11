@@ -12,9 +12,9 @@ run = do
   case (optionsCreate, optionsExtract) of
     (True, True) -> logError "invalid option"
     (True, False) -> do
-      logInfo "create mode"
+      logDebug "create mode"
       create argHsfiles argDirs
     (False, True) -> do
-      logInfo "extract mode"
+      logDebug "extract mode"
       extract argHsfiles argDirs
     (False, False) -> logError "invalid option"

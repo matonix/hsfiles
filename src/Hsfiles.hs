@@ -8,8 +8,8 @@ module Hsfiles
 import Import
 import qualified RIO.Map as Map
 import qualified RIO.Text as Text
-import RIO.Directory
 import RIO.FilePath
+import RIO.Directory
 import Data.List.Extra
 import Safe
 
@@ -20,19 +20,19 @@ type Hsfiles = Map FilePath Text
 
 extract :: FilePath -> FilePath -> RIO App ()
 extract hsfilesPath dirsPath = do
-  current <- getCurrentDirectory
-  logDebug $ "source: " <> fromString (current </> hsfilesPath)
-  logDebug $ "dest: " <> fromString (current </> dirsPath)
-  hsfiles <- liftIO $ readHsfiles (current </> hsfilesPath)
-  liftIO $ writeDirs (current </> dirsPath) hsfiles
+  logDebug $ "source: " <> fromString hsfilesPath
+  logDebug $ "dest: " <> fromString dirsPath
+  hsfiles <- liftIO $ readHsfiles hsfilesPath
+  forM_ (Map.keys hsfiles) $ \path -> 
+    logDebug $ "extract: " <> fromString path
+  liftIO $ writeDirs dirsPath hsfiles
 
 create :: FilePath -> FilePath -> RIO App ()
 create hsfilesPath dirsPath = do
-  current <- getCurrentDirectory
-  logDebug $ "source: " <> fromString (current </> dirsPath)
-  logDebug $ "dest: " <> fromString (current </> hsfilesPath)
-  hsfiles <- liftIO $ readDirs (current </> dirsPath)
-  liftIO $ writeHsfiles (current </> hsfilesPath) hsfiles
+  logDebug $ "source: " <> fromString hsfilesPath
+  logDebug $ "dest: " <> fromString dirsPath
+  hsfiles <- liftIO $ readDirs dirsPath
+  liftIO $ writeHsfiles hsfilesPath hsfiles
 
 -- * Low level functions
 

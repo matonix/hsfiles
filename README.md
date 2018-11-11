@@ -10,11 +10,32 @@ Convert `*.hsfiles` from/to actual directory structure using **tar**-like comman
 $ hsfiles -x YOUR_TEMPLATE.hsfiles YOUR_TEMPLATE_DIR
 ```
 
-and you get:
+For example, if you extract `new-template.hsfile`, type:
+
+```shell
+$ hsfiles -x new-template.hsfiles new-template
+```
+
+and you can get:
 
 ```shell
 $ tree
+.
+├── new-template
+│   ├── ChangeLog.md
+│   ├── LICENSE
+│   ├── README.md
+│   ├── Setup.hs
+│   ├── app
+│   │   └── Main.hs
+│   ├── package.yaml
+│   ├── src
+│   │   └── Lib.hs
+│   └── test
+│       └── Spec.hs
+└── new-template.hsfiles
 
+4 directories, 9 files
 ```
 
 ### Directory structure > hsfiles

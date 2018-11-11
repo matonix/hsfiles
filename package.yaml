@@ -34,7 +34,7 @@ library:
   source-dirs: src
 
 executables:
-  hsfiles-exe:
+  hsfiles:
     main:                Main.hs
     source-dirs:         app
     dependencies:

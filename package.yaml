@@ -22,6 +22,10 @@ description:         Please see the README on Github at <https://github.com/mato
 dependencies:
 - base >= 4.10 && < 10
 - rio >= 0.1.1.0
+- megaparsec == 6.5.0
+- parser-combinators
+- extra
+- safe
 
 ghc-options:
 - -Wall

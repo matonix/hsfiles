@@ -1,10 +1,10 @@
 # hsfiles
 
-Convert `*.hsfiles` from/to actual directory structure using **tar**-like commands
+Convert `*.hsfiles` from/to actual directory structures using **tar**-like commands
 
 ## Usage
 
-### Hsfiles > directory structure
+### Hsfiles > directory structures
 
 ```shell
 $ hsfiles -x YOUR_TEMPLATE.hsfiles YOUR_TEMPLATE_DIR
@@ -38,7 +38,7 @@ $ tree
 4 directories, 9 files
 ```
 
-### Directory structure > hsfiles
+### Directory structures > hsfiles
 
 ```shell
 $ hsfiles -c YOUR_TEMPLATE.hsfiles YOUR_TEMPLATE_DIR
@@ -51,21 +51,21 @@ $ hsfiles -c YOUR_TEMPLATE.hsfiles YOUR_TEMPLATE_DIR
 
 ## Motivation
 
-GHC Haskell のビルドツール stack を使って新しいプロジェクトを作るとき、 stack-template はよく使われるディレクトリ構造の構築を支援する。stack-template はあなた自身で作ることもでき、その内容は `*.hsfiles` というファイル形式で管理する。
+When you start new GHC Haskell project with stack build tool, stack-template is useful to generate frequently used directory structures. You can write your own stack-template and save it as `*.hsfiles`.
 
 #### Problem
 
-`*.hsfiles` の中身は、`stack new` したときに作られるディレクトリ構造の中身が連結されている。そのため、構築したいディレクトリ構造が複雑になると、`*.hsfiles` が肥大化し、管理が困難になる。
+A `*.hsfiles` consists of the concatenation of the directory structures when you have `stack new`. So, if you want to get more complex directory structures, your `*.hsfiles` will get large and hard to edit.
 
 #### Solution
 
-- Hsfiles > directory structure
-  - `stack new` したときのようにディレクトリに展開(x)される。
-    - ただしプレースホルダー部分（`{{HERE}}`）は変化しないようにしている。
-      - プレースホルダーの埋め方はあなたの `~/.stack/config.yaml` に依存するから。
-  - 通常のファイル操作と同様の方法でテンプレートを編集できる。
-- Directory structure > hsfiles
-  - ディレクトリ構造から `*.hsfiles` を作成（c）する。
-    - これによって、実際に `stack new` するときに使ったり、再配布したりできる。
-  - また、あなたが実際に作成しているプロジェクトからテンプレートを抽出する作業にも使えるかもしれない。
-    - Limitation: まだ、展開された文字列からプレースホルダーを構築する方法はわからない。
+- Hsfiles > directory structures
+  - `hsfiles` extract (x) your `*.hsfiles` into the directory structures as in `stack new`
+    - however, `hsfiles` does not change `{{placeholder}}` because the way to fill it depends on your `~/.stack/config.yaml`
+  - and you can edit the extracted template files as usual file editing
+
+- Directory structures > hsfiles
+  - `hsfiles` create (c) `*.hsfiles` from given directory structures
+    - you can use this when you actually `stack new` or you can share it
+  - also, `hsfiles` may be useful when you create new templates from your actual Haskell project
+    - LIMITATION: `hsfiles` has not be able to generate `{{placeholder}}` from extracted strings yet
